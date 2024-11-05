@@ -2,6 +2,7 @@
 import Navbar from '@/components/Navbar'
 import QuickBadge from '@/components/QuickBadge'
 import Search from '@/components/Search'
+import Trending from '@/components/Trending'
 import React from 'react'
 
 const page = () => {
@@ -10,6 +11,7 @@ const page = () => {
         <Navbar/>
         <Search/>
         <QuickBadge/>
+        <Trending/>
     </div>
   )
 }

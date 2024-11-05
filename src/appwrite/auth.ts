@@ -1,4 +1,4 @@
-import env from "@/app/environment/config";
+import env from "@/environment/config";
 import { Account, Client, ID, OAuthProvider } from "appwrite";
 
 export class UserAuthService {
