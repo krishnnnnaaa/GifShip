@@ -76,20 +76,7 @@ export class UserAuthService {
             }
         }
     }
-
-    async GithubLogin(){
-        try {
-            const loginWithGithub = await this.account.createOAuth2Session(OAuthProvider.Github, env.originkey, env.originkey)
-            if(loginWithGithub){
-                return loginWithGithub
-            }else return
-        } catch (error) {
-            if(error instanceof Error){
-                console.log(error);
-            }
-        }
-    }
-    async SpotifyLogin(){
+    async spotifyLogin(){
         try {
             const loginWithSpotify = await this.account.createOAuth2Session(OAuthProvider.Spotify, env.originkey, env.originkey)
             if(loginWithSpotify){

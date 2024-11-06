@@ -11,6 +11,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import env from "@/environment/config";
 
 const Navbar = () => {
   const { setTheme } = useTheme();
@@ -21,16 +23,34 @@ const Navbar = () => {
       </div>
       <div>
         <ul className="flex items-center">
-            <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-fuchsia-600	hover:bg-fuchsia-600 hover:text-white transition-all">Reactions</li>
+            <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-fuchsia-600	hover:bg-fuchsia-600 hover:text-white transition-all">
+              <Link href={`${env.originkey}categories/reactions/`}>
+              Reactions
+              </Link>
+              </li>
             <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-green-600	hover:bg-green-600
-             hover:text-white transition-all">Sports</li>
+             hover:text-white transition-all">
+               <Link href={`${env.originkey}categories/sports/`}>
+              Sports
+               </Link>
+              </li>
             <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-sky-600	hover:bg-sky-600
-             hover:text-white transition-all">Anime</li>
+             hover:text-white transition-all">
+               <Link href={`${env.originkey}categories/anime/`}>
+              Anime
+               </Link>
+              </li>
             <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-lime-600	hover:bg-lime-600
-             hover:text-white transition-all">Cats</li>
+             hover:text-white transition-all">
+               <Link href={`${env.originkey}categories/cats/`}>
+              Cat 
+               </Link>
+              </li>
             <li className="bg-violet-800 px-4 cursor-pointer
              mx-4 py-2 rounded-none text-white text-base hover:bg-violet-900">
+               <Link href={`${env.originkey}login`}>
                 Login
+               </Link>
             </li>
         
             <div>

@@ -9,7 +9,7 @@ const QuickBadge = () => {
             const trendingGifTerms = await axios.get(`https://api.giphy.com/v1/trending/searches?api_key=${env.giphyKey}`)
             if(trendingGifTerms){
                 setTrendingData(trendingGifTerms.data.data)
-                setTrendingData(prev => prev?.slice(0,6))
+                setTrendingData(prev => prev?.slice(0,8))
             }
         } catch (error) {
             if(error instanceof Error){
