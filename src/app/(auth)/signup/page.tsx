@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from 'zod'
@@ -20,10 +20,12 @@ import userAuthService from '@/appwrite/auth'
 import { useToast } from '@/hooks/use-toast'
 import { Separator } from '@/components/ui/separator'
 import { useRouter } from 'next/navigation'
+import { Loader2Icon } from 'lucide-react'
 
 const page = () => {
     const {toast} = useToast()
     const router = useRouter()
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const form = useForm<z.infer<typeof userSchema>>({
         resolver: zodResolver(userSchema),
         defaultValues: {
@@ -45,6 +47,7 @@ const page = () => {
 
     const onSubmit = async(data: z.infer<typeof userSchema>)=> {
         try {
+          setIsSubmitting(true)
             const user = await userAuthService.createUser({name: data.name, email: data.email, password: data.password})
             if(user){
                 toast({
@@ -56,11 +59,13 @@ const page = () => {
             if(error instanceof Error){
                 console.log(error);
                 toast({
-                    description: 'User has been created successfully',
+                    description: error.message,
                     variant: 'destructive'
                 })
                 
             }
+        }finally{
+          setIsSubmitting(false)
         }
     }
   return (
@@ -91,7 +96,7 @@ const page = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., sample@gmail.com" {...field} />
+                <Input placeholder="e.g., example@gmail.com" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -108,7 +113,15 @@ const page = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className='w-full'>Create Account</Button>
+        <Button type="submit" disabled={isSubmitting} className='w-full'>
+          {
+            isSubmitting ? (
+              <Loader2Icon className='animate-spin'/>
+            ) : (
+              'Create Account'
+            )
+          }
+          </Button>
       </form>
     </Form>
             <div className='flex items-center w-full  justify-center space-x-2 my-6'>
