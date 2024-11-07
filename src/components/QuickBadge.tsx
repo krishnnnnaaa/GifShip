@@ -1,5 +1,6 @@
 import env from '@/environment/config'
 import axios from 'axios'
+import { LucideSearch, Search } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 const QuickBadge = () => {
@@ -9,7 +10,7 @@ const QuickBadge = () => {
             const trendingGifTerms = await axios.get(`https://api.giphy.com/v1/trending/searches?api_key=${env.giphyKey}`)
             if(trendingGifTerms){
                 setTrendingData(trendingGifTerms.data.data)
-                setTrendingData(prev => prev?.slice(0,8))
+                setTrendingData(prev => prev?.slice(0,6))
             }
         } catch (error) {
             if(error instanceof Error){
@@ -24,7 +25,8 @@ const QuickBadge = () => {
     <div className='flex space-x-3 justify-around w-[85%] mx-auto md:overflow-auto overflow-x-scroll'>
         {
             trendingData && trendingData.map((item: any) => (
-                <div key={item} className='border-2 cursor-pointer dark:border-gray-800 border-black dark:hover:bg-gray-800 rounded-3xl py-2 px-5'>
+                <div key={item} className='border-2 flex items-center cursor-pointer dark:border-gray-800 border-black dark:hover:bg-gray-800 rounded-3xl py-2 px-5'>
+                    <LucideSearch size={15} className='mx-2 text-fuchsia-600'/> 
         {item}
     </div>
             ))

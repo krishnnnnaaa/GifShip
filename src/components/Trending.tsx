@@ -3,6 +3,8 @@ import env from '@/environment/config'
 import { IGif } from '@giphy/js-types'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import GifsGrid from './GifsGrid'
+import { Loader2 } from 'lucide-react'
 
 const Trending = () => {
     const [data, setData] = useState<[IGif]>()
@@ -28,11 +30,12 @@ const Trending = () => {
             <h1 className='text-5xl font-semibold'>Trending Now</h1>
         </div>
         <div className='flex flex-wrap justify-center px-8'>
+        {
+          !data && <Loader2 className="animate-spin" size={40}/>
+        }
             {
                 data && data.map((item) => (
-                    <div key={item.id}>
-                    <img className='m-2 rounded-lg' width={item.images.fixed_height_downsampled.width} height={item.images.fixed_height_downsampled.height} src={item.images.fixed_height_downsampled.url}/>
-                    </div>
+                    <GifsGrid gif={item.images.fixed_height_downsampled.url} height={item.images.fixed_height_downsampled.height} width={item.images.fixed_height_downsampled.width} key={item.id}/>
                 ))
             }
         </div>
