@@ -1,9 +1,11 @@
 import env from '@/environment/config'
 import axios from 'axios'
 import { LucideSearch, Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 const QuickBadge = () => {
+    const router = useRouter()
     const [trendingData, setTrendingData] = useState<string[]>()
     const showTrending = async()=> {
         try {
@@ -21,11 +23,14 @@ const QuickBadge = () => {
     useEffect(() => {
         showTrending()
     }, [])
+    const handleQuickSearch =(item:string)=> {
+        router.push(`/search?q=${item}`)
+    }
   return (
     <div className='flex space-x-3 justify-around w-[85%] mx-auto md:overflow-auto overflow-x-scroll'>
         {
-            trendingData && trendingData.map((item: any) => (
-                <div key={item} className='border-2 flex items-center cursor-pointer dark:border-gray-800 border-black dark:hover:bg-gray-800 rounded-3xl py-2 px-5'>
+            trendingData && trendingData.map((item: string) => (
+                <div onClick={()=> handleQuickSearch(item)} key={item} className='border-2 flex items-center cursor-pointer dark:border-gray-800 border-black dark:hover:bg-gray-800 rounded-3xl py-2 px-5'>
                     <LucideSearch size={15} className='mx-2 text-fuchsia-600'/> 
         {item}
     </div>

@@ -40,7 +40,7 @@ const page = () => {
       <Search />
       <div>
         <div className="flex w-[85%] mx-auto my-8 items-center">
-          <span className="text-3xl font-semibold">Reaction Gifs</span>
+          <span className="text-3xl font-semibold">{category} Gifs</span>
           <HoverCard>
             <HoverCardTrigger>
               <span>

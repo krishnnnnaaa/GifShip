@@ -21,6 +21,7 @@ import { useToast } from '@/hooks/use-toast'
 import { Separator } from '@/components/ui/separator'
 import { useRouter } from 'next/navigation'
 import { Loader2Icon } from 'lucide-react'
+import Link from 'next/link'
 
 const page = () => {
     const {toast} = useToast()
@@ -72,7 +73,7 @@ const page = () => {
     <div className='flex min-h-screen bg-[#000811] flex-col pt-12 items-center w-full'>
         <div className='m-8'>
             <h1 className='text-4xl font-semibold'>GifShip</h1>
-            <span className='text-lg text-gray-600'>Let&apos;s get started</span>
+            <span className='text-lg text-fuchsia-600'>Let&apos;s get started</span>
         </div>
             <div className='w-[350px]'>
             <Form {...form}>
@@ -113,7 +114,7 @@ const page = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isSubmitting} className='w-full'>
+        <Button type="submit" disabled={isSubmitting} className='w-full bg-fuchsia-600 hover:bg-fuchsia-800 text-white'>
           {
             isSubmitting ? (
               <Loader2Icon className='animate-spin'/>
@@ -133,6 +134,11 @@ const page = () => {
       <Button onClick={signupWithGoogle} className='w-40 bg-transparent border-gray-600 border-2 rounded-lg text-white px-5 hover:text-black'><FcGoogle style={{width: '20px', height: '20px'}} /> Google </Button>
       <Button onClick={signupWithSpotify} className='w-40 bg-transparent border-gray-600 border-2 rounded-lg text-white px-5 hover:text-black'><FaSpotify className='text-green-700' style={{width: '20px', height: '20px'}} /> Spotify </Button>
     </div>
+            </div>
+            <div className='my-5'>
+              <span>Already have an account? </span>
+              {"  "}
+              <Link className='underline text-fuchsia-600' href={'/login'}>Sign in</Link>
             </div>
         
     </div>

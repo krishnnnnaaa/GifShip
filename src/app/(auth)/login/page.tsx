@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input"
 import { z } from 'zod'
 import { Separator } from '@/components/ui/separator'
 import { Loader2Icon } from 'lucide-react'
+import Link from 'next/link'
 
 const page = () => {
   const {toast} = useToast()
@@ -71,7 +72,7 @@ const page = () => {
         <div className='flex min-h-screen bg-[#000811] flex-col pt-12 items-center w-full'>
         <div className='m-8'>
             <h1 className='text-4xl font-semibold'>GifShip</h1>
-            <span className='text-lg text-gray-600 my-4'>Welcome again</span>
+            <span className='text-lg text-fuchsia-600 my-4'>Welcome again</span>
         </div>
             <div className='w-[350px]'>
             <Form {...form}>
@@ -100,7 +101,7 @@ const page = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isSubmitting} className='w-full'>
+        <Button type="submit" disabled={isSubmitting} className='w-full text-white bg-fuchsia-600 hover:bg-fuchsia-800'>
           {
             isSubmitting ? (
               <Loader2Icon className='animate-spin'/>
@@ -122,8 +123,12 @@ const page = () => {
     </div>
             </div>
         
+    <div className='my-5'>
+              <span>Don&apos;t have an account? </span>
+              {"  "}
+              <Link className='underline text-fuchsia-600' href={'/signup'}>Register</Link>
+            </div>
     </div>
-        
     </div>
   )
 }
