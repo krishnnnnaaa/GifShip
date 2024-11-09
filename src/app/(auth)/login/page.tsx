@@ -57,7 +57,7 @@ const page = () => {
           if(error instanceof Error){
               console.log(error);
               toast({
-                  description: 'User has been created successfully',
+                  description: 'Somethings went wrong',
                   variant: 'destructive'
               })
               

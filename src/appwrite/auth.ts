@@ -91,7 +91,30 @@ export class UserAuthService {
 
     async getThisUser(){
         try {
-            return await this.account.get();
+            if(this.account){
+                const userAccount =  await this.account.get();
+                if(userAccount) return userAccount
+            }
+        } catch (error) {
+            if(error instanceof Error){
+                console.log(error);
+            }
+        }
+    }
+
+    async loginAsGuest(){
+        try {
+            await this.account.createAnonymousSession()
+        } catch (error) {
+            
+        }
+    }
+    async getUserSession(){
+        try {
+            if(this.account){
+                const userSession =  await this.account.getSession('current')
+                if(userSession) return userSession;
+            }
         } catch (error) {
             if(error instanceof Error){
                 console.log(error);

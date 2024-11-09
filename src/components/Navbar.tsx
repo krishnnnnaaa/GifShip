@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -13,9 +13,40 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import env from "@/environment/config";
+import userAuthService from "@/appwrite/auth";
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { setUserDetails, userStateType } from "@/app/features/userSlice";
 
 const Navbar = () => {
   const { setTheme } = useTheme();
+  const [user, setUser] = useState<userStateType>()
+  const userState = useAppSelector((state)=> state.user)
+  const dispatch = useAppDispatch()
+  console.log(user);
+  
+  useEffect(() => {
+    setUser(userState)
+
+     userAuthService.getThisUser()
+     .then(res=>{
+      if(res){
+        dispatch(setUserDetails({name: res.name, createdAt: res.$createdAt, email: res.email, id:res.$id, status: res.status}))
+      }})
+      .catch(err => console.log(err))
+  }, [userState])
+
+  const logout = ()=> {
+    userAuthService.logout()
+    setUser({
+      createdAt: '',
+      email: '',
+      id:'',
+      name: '',
+      status: false
+    })
+  }
+  
+  
   return (
     <div className="flex items-center py-3 px-4 justify-between dark:text-white text-black dark:bg-[#010B13]">
       <div>
@@ -46,12 +77,20 @@ const Navbar = () => {
               Cat 
                </Link>
               </li>
-            <li className="bg-violet-800 px-4 cursor-pointer
-             mx-4 py-2 rounded-none text-white text-base hover:bg-violet-900">
-               <Link href={`${env.originkey}login`}>
-                Login
-               </Link>
-            </li>
+              {
+               user && user.status ?
+               <li className="bg-violet-800 px-4 cursor-pointer
+               mx-4 py-2 rounded-none text-white text-base hover:bg-violet-900" onClick={logout}>
+                   Log out
+               </li>
+            :
+           <Link href={`${env.originkey}login`}>
+             <li className="bg-violet-800 px-4 cursor-pointer
+            mx-4 py-2 rounded-none text-white text-base hover:bg-violet-900">
+            Login
+        </li> 
+           </Link>
+            }
         
             <div>
             <DropdownMenu>

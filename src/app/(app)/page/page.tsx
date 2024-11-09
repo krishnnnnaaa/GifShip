@@ -6,6 +6,7 @@ import Trending from '@/components/Trending'
 import React from 'react'
 
 const page = () => {
+  
   return (
     <div>
         <Navbar/>
