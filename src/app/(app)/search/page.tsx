@@ -44,7 +44,7 @@ const page = () => {
         }
             {
                 result && result.map((item) => (
-                    <GifsGrid gif={item.images.fixed_height_downsampled.url} height={item.images.fixed_height_downsampled.height} width={item.images.fixed_height_downsampled.width} key={item.id}/>
+                    <GifsGrid slug={item.slug} gif={item.images.fixed_height_downsampled.url} height={item.images.fixed_height_downsampled.height} width={item.images.fixed_height_downsampled.width} key={item.id}/>
                 ))
             }
         </div>

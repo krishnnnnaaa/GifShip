@@ -64,37 +64,33 @@ export class UserAuthService {
         }
     }
 
-    async googleLogin(){
-        try {
-            const loginWithGoogle = await this.account.createOAuth2Session(OAuthProvider.Google, env.originkey, env.originkey)
-            if(loginWithGoogle){
-                return loginWithGoogle
-            }else return
-        } catch (error) {
-            if(error instanceof Error){
-                console.log(error);
-            }
-        }
-    }
-    async spotifyLogin(){
-        try {
-            const loginWithSpotify = await this.account.createOAuth2Session(OAuthProvider.Spotify, env.originkey, env.originkey)
-            if(loginWithSpotify){
-                return loginWithSpotify
-            }else return
-        } catch (error) {
-            if(error instanceof Error){
-                console.log(error);
-            }
-        }
-    }
+    // async googleLogin(){
+    //     try {
+    //         return await this.account.createOAuth2Session(OAuthProvider.Google, `${env.originkey}page`, `${env.originkey}login`)
+    //             // console.log(loginWithGoogle);
+    //     } catch (error) {
+    //         if(error instanceof Error){
+    //             console.log(error);
+    //         }
+    //     }
+    // }
+    // async spotifyLogin(){
+    //     try {
+    //         const loginWithSpotify = await this.account.createOAuth2Session(OAuthProvider.Spotify, `${env.originkey}page`, env.originkey)
+    //         if(loginWithSpotify){
+    //             return loginWithSpotify
+    //         }else return
+    //     } catch (error) {
+    //         if(error instanceof Error){
+    //             console.log(error);
+    //         }
+    //     }
+    // }
 
     async getThisUser(){
         try {
-            if(this.account){
                 const userAccount =  await this.account.get();
                 if(userAccount) return userAccount
-            }
         } catch (error) {
             if(error instanceof Error){
                 console.log(error);
@@ -102,25 +98,23 @@ export class UserAuthService {
         }
     }
 
-    async loginAsGuest(){
-        try {
-            await this.account.createAnonymousSession()
-        } catch (error) {
+    // async loginAsGuest(){
+    //     try {
+    //         await this.account.createAnonymousSession()
+    //     } catch (error) {
             
-        }
-    }
-    async getUserSession(){
-        try {
-            if(this.account){
-                const userSession =  await this.account.getSession('current')
-                if(userSession) return userSession;
-            }
-        } catch (error) {
-            if(error instanceof Error){
-                console.log(error);
-            }
-        }
-    }
+    //     }
+    // }
+    // async getUserSession(){
+    //     try {
+    //             const userSession =  await this.account.getSession('current')
+    //             return userSession;
+    //     } catch (error) {
+    //         if(error instanceof Error){
+    //             console.log(error);
+    //         }
+    //     }
+    // }
 
     async logout(){
         try {

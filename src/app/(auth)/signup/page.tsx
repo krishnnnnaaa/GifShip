@@ -36,14 +36,14 @@ const page = () => {
     },
   });
 
-  const signupWithGoogle = async () => {
-    userAuthService.googleLogin();
-    router.push("/page");
-  };
-  const signupWithSpotify = async () => {
-    userAuthService.spotifyLogin();
-    router.push("/page");
-  };
+  // const signupWithGoogle = async () => {
+  //   userAuthService.googleLogin();
+  //   router.push("/page");
+  // };
+  // const signupWithSpotify = async () => {
+  //   userAuthService.spotifyLogin();
+  //   router.push("/page");
+  // };
 
   const onSubmit = async (data: z.infer<typeof userSchema>) => {
     try {
@@ -129,7 +129,7 @@ const page = () => {
             </Button>
           </form>
         </Form>
-        <div className="flex items-center w-full  justify-center space-x-2 my-6">
+        {/* <div className="flex items-center w-full  justify-center space-x-2 my-6">
           <Separator orientation="horizontal" className="w-24" />
           <span>or register with</span>
           <Separator orientation="horizontal" className="w-24" />
@@ -151,7 +151,7 @@ const page = () => {
             />{" "}
             Spotify{" "}
           </Button>
-        </div>
+        </div> */}
       </div>
       <div className="my-5">
         <span>Already have an account? </span>

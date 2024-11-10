@@ -1,22 +1,11 @@
 'use client'
-import type { Metadata } from "next";
+
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 const karla = localFont({
   src: "./fonts/Karla-VariableFont_wght.woff",
@@ -34,18 +23,17 @@ export default function RootLayout({
       <body
         className={`${karla.variable} antialiased font-karla`}
       >
-        <Provider store={store}>
-
                   <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
             >
+        <Provider store={store}>
             {children}
+            </Provider>
             <Toaster />
           </ThemeProvider>
-            </Provider>
       </body>
     </html>
   );

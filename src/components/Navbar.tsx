@@ -26,13 +26,14 @@ const Navbar = () => {
   
   useEffect(() => {
     setUser(userState)
-
      userAuthService.getThisUser()
      .then(res=>{
-      if(res){
-        dispatch(setUserDetails({name: res.name, createdAt: res.$createdAt, email: res.email, id:res.$id, status: res.status}))
-      }})
+     if(res){
+       dispatch(setUserDetails({name: res.name, createdAt: res.$createdAt, email: res.email, id:res.$id, status: res.status}))
+      }
+  })
       .catch(err => console.log(err))
+      
   }, [userState])
 
   const logout = ()=> {

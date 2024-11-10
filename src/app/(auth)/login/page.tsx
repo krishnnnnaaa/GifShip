@@ -33,15 +33,17 @@ const page = () => {
             password: ''
         }
     })
-    const signupWithGoogle = async()=> {
-      userAuthService.googleLogin()
-      router.push('/page')
+    // const signupWithGoogle = async()=> {
+    //   const result = await userAuthService.googleLogin()
+    //   console.log('result: ', result);
       
-    }
-    const signupWithSpotify = async()=> {
-      userAuthService.spotifyLogin()
-      router.push('/page')
-    }
+    //   await userAuthService.getThisUser()
+      
+    // }
+    // const signupWithSpotify = async()=> {
+    //   await userAuthService.spotifyLogin()
+    //   router.push('/page')
+    // }
 
     const onSubmit = async(data: z.infer<typeof signinSchema>)=> {
       try {
@@ -112,7 +114,7 @@ const page = () => {
           </Button>
       </form>
     </Form>
-            <div className='flex items-center w-full  justify-center space-x-2 my-6'>
+            {/* <div className='flex items-center w-full  justify-center space-x-2 my-6'>
             <Separator orientation='horizontal' className='w-24' />
             <span>or continue with</span>
             <Separator orientation='horizontal' className='w-24' />
@@ -120,7 +122,7 @@ const page = () => {
     <div className='w-full flex justify-around'>
       <Button onClick={signupWithGoogle} className='w-40 bg-transparent border-gray-600 border-2 rounded-lg text-white px-5 hover:text-black'><FcGoogle style={{width: '20px', height: '20px'}} /> Google </Button>
       <Button onClick={signupWithSpotify} className='w-40 bg-transparent border-gray-600 border-2 rounded-lg text-white px-5 hover:text-black'><FaSpotify className='text-green-700' style={{width: '20px', height: '20px'}} /> Spotify </Button>
-    </div>
+    </div> */}
             </div>
         
     <div className='my-5'>
