@@ -27,15 +27,17 @@ const QuickBadge = () => {
         router.push(`/search?q=${item}`)
     }
   return (
-    <div className='flex space-x-3 justify-around w-[85%] mx-auto md:overflow-auto overflow-x-scroll'>
+        <div className='overflow-x-scroll md:overflow-x-auto px-4'>
+    <div className='flex space-x-3 justify-around w-max mx-auto'>
         {
             trendingData && trendingData.map((item: string) => (
                 <div onClick={()=> handleQuickSearch(item)} key={item} className='border-2 flex items-center cursor-pointer dark:border-gray-800 border-black dark:hover:bg-gray-800 rounded-3xl py-2 px-5'>
                     <LucideSearch size={15} className='mx-2 text-fuchsia-600'/> 
         {item}
-    </div>
+                </div>
             ))
-    }
+        }
+        </div>
     </div>
   )
 }

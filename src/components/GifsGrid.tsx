@@ -17,7 +17,7 @@ const GifsGrid = ({
       <Link href={`/gif/${slug}`}>
       <div>
         <img
-          className="m-2 rounded-lg"
+          className="m-2 rounded-lg md:w-auto md:h-auto w-32 "
           width={width}
           height={height}
           src={gif}

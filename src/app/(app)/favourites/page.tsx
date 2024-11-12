@@ -27,7 +27,6 @@ const page = () => {
     useEffect(() => {
         const getImages = async()=>{
             const response = await dataImage.getImages()
-            console.log(response?.documents)
             setFavourites(response?.documents as favouriteGifs[] | undefined)
         }
         getImages()

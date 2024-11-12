@@ -27,7 +27,7 @@ const Trending = () => {
   return (
     <div>
         <div className='w-[85%] mx-auto my-8'>
-            <h1 className='text-5xl font-semibold'>Trending Now</h1>
+            <h1 className='text-xl md:text-5xl font-semibold'>Trending Now</h1>
         </div>
         <div className='flex flex-wrap justify-center px-8'>
         {

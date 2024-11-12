@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { FcGoogle } from "react-icons/fc";
+import logo from "../../logo.png"
 import { FaSpotify } from "react-icons/fa";
 import {
   Form,
@@ -21,6 +22,7 @@ import { z } from 'zod'
 import { Separator } from '@/components/ui/separator'
 import { Loader2Icon } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const page = () => {
   const {toast} = useToast()
@@ -33,18 +35,6 @@ const page = () => {
             password: ''
         }
     })
-    // const signupWithGoogle = async()=> {
-    //   const result = await userAuthService.googleLogin()
-    //   console.log('result: ', result);
-      
-    //   await userAuthService.getThisUser()
-      
-    // }
-    // const signupWithSpotify = async()=> {
-    //   await userAuthService.spotifyLogin()
-    //   router.push('/page')
-    // }
-
     const onSubmit = async(data: z.infer<typeof signinSchema>)=> {
       try {
         setIsSubmitting(true)
@@ -72,9 +62,9 @@ const page = () => {
   return (
     <div>
         <div className='flex min-h-screen bg-[#000811] flex-col pt-12 items-center w-full'>
-        <div className='m-8'>
-            <h1 className='text-4xl font-semibold'>GifShip</h1>
-            <span className='text-lg text-fuchsia-600 my-4'>Welcome again</span>
+        <div className='m-8 text-center'>
+        <Image src={logo} className='mx-auto' height={150} width={150} alt="logo"/>
+            <span className='text-xl md:text-lg text-fuchsia-600 my-4'>Welcome again</span>
         </div>
             <div className='w-[350px]'>
             <Form {...form}>
@@ -84,9 +74,9 @@ const page = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className='text-xl md:text-base'>Email</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., example@gmail.com" {...field} />
+                <Input className='md:h-auto h-12 md:text-base text-xl' type='email' placeholder="e.g., example@gmail.com" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -96,14 +86,15 @@ const page = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel className='text-xl md:text-base'>Password</FormLabel>
               <FormControl>
-                <Input placeholder="password" {...field} />
+              <Input className='md:h-auto h-12 md:text-base text-xl' type='password' placeholder="password" {...field} />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isSubmitting} className='w-full text-white bg-fuchsia-600 hover:bg-fuchsia-800'>
+        <Button type="submit" disabled={isSubmitting} 
+        className='w-full text-white bg-fuchsia-600 hover:bg-fuchsia-800 md:text-base text-xl'>
           {
             isSubmitting ? (
               <Loader2Icon className='animate-spin'/>
@@ -114,18 +105,9 @@ const page = () => {
           </Button>
       </form>
     </Form>
-            {/* <div className='flex items-center w-full  justify-center space-x-2 my-6'>
-            <Separator orientation='horizontal' className='w-24' />
-            <span>or continue with</span>
-            <Separator orientation='horizontal' className='w-24' />
-            </div>
-    <div className='w-full flex justify-around'>
-      <Button onClick={signupWithGoogle} className='w-40 bg-transparent border-gray-600 border-2 rounded-lg text-white px-5 hover:text-black'><FcGoogle style={{width: '20px', height: '20px'}} /> Google </Button>
-      <Button onClick={signupWithSpotify} className='w-40 bg-transparent border-gray-600 border-2 rounded-lg text-white px-5 hover:text-black'><FaSpotify className='text-green-700' style={{width: '20px', height: '20px'}} /> Spotify </Button>
-    </div> */}
             </div>
         
-    <div className='my-5'>
+    <div className='my-5 md:text-sm text-base'>
               <span>Don&apos;t have an account? </span>
               {"  "}
               <Link className='underline text-fuchsia-600' href={'/signup'}>Register</Link>

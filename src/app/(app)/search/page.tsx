@@ -36,7 +36,7 @@ const page = () => {
         <Navbar/>
         <Search value={query}/>
         <div className='w-[85%] mx-auto'>
-            <span className='text-2xl'>Search result for {query}</span>
+            <span className='text-xl md:text-2xl'>Search result for {query}</span>
         </div>
         <div className='flex flex-wrap justify-center px-8'>
         {

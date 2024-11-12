@@ -5,6 +5,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import logo from '../app/logo.png'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -17,6 +18,7 @@ import env from "@/environment/config";
 import userAuthService from "@/appwrite/auth";
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { setUserDetails, userStateType } from "@/app/features/userSlice";
+import Image from "next/image";
 
 const Navbar = () => {
   const { setTheme } = useTheme();
@@ -61,28 +63,30 @@ const Navbar = () => {
   return (
     <div className="flex items-center py-3 px-4 justify-between dark:text-white text-black dark:bg-[#010B13]">
       <div>
-        <h1>GIFSHIP</h1>
+        <Link href={'/page'}>
+        <Image src={logo} height={90} width={90} alt="logo"/>
+        </Link>
       </div>
       <div>
         <ul className="flex items-center">
-            <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-fuchsia-600	hover:bg-fuchsia-600 hover:text-white transition-all">
+            <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-fuchsia-600	hover:bg-fuchsia-600 hover:text-white transition-all">
               <Link href={`${env.originkey}categories/reactions/`}>
               Reactions
               </Link>
               </li>
-            <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-green-600	hover:bg-green-600
+            <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-green-600	hover:bg-green-600
              hover:text-white transition-all">
                <Link href={`${env.originkey}categories/sports/`}>
               Sports
                </Link>
               </li>
-            <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-sky-600	hover:bg-sky-600
+            <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-sky-600	hover:bg-sky-600
              hover:text-white transition-all">
                <Link href={`${env.originkey}categories/anime/`}>
               Anime
                </Link>
               </li>
-            <li className="pt-2 pb-1 cursor-pointer w-20 text-center mx-4 border-b-4 border-lime-600	hover:bg-lime-600
+            <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-lime-600	hover:bg-lime-600
              hover:text-white transition-all">
                <Link href={`${env.originkey}categories/cats/`}>
               Cat 
@@ -103,7 +107,7 @@ const Navbar = () => {
                 Favourite
                 </Link>
                 </DropdownMenuItem>
-               <DropdownMenuItem>Log out</DropdownMenuItem>
+               <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
              </DropdownMenuContent>
            </DropdownMenu>
             :

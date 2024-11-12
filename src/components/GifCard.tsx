@@ -20,7 +20,7 @@ import { Separator } from "./ui/separator";
 import { FaWhatsapp } from "react-icons/fa";
 import Suggestions from "./Suggestions";
 import dataImage from "@/appwrite/image";
-
+import { useToast } from "@/hooks/use-toast";
 const GifCard = ({
   authorName = "Not Specified",
   isVerified,
@@ -65,27 +65,52 @@ const GifCard = ({
     url = gif?.replace("media1", "i");
     if(url === gif){
       url = gif?.replace("media0", 'i')
-    }
-  } 
-
-  const [toggleLike, setToggleLike] = useState(false)
-  const handleFavouriteGif = ()=> {
-    setToggleLike(!toggleLike)
-  }
-  useEffect(() => {
-    if(toggleLike){      
-      dataImage.saveImage({slug, url: gif, title, gifId: id, type: gifType, alt_text:alt, width:responsiveWidth, height: responsiveHeight})
-      if(!toggleLike){
-        dataImage.removeImage(id)
+      if(url === gif){
+        url = gif?.replace("media3", 'i')
+        if(url === gif){
+          url = gif?.replace("media4", 'i')
+        }
       }
     }
-  }, [toggleLike])
+  } 
+  const {toast} = useToast()
+  const [toggleLike, setToggleLike] = useState(false)
+  const truncatedSource = src.length > 41 ? src.slice(0, 38) + '...' : src;
+  const truncatedDescription = authorDescription.length > 100 ? authorDescription.slice(0, 50) + '...' : authorDescription;
 
+  const handleFavouriteGif = ()=> {
+    
+    if(toggleLike){      
+      dataImage.removeImage(id)
+      setToggleLike(false)
+    }else{
+        setToggleLike(true)
+        dataImage.saveImage({slug, url: gif, title, gifId: id, type: gifType, alt_text:alt, width:responsiveWidth, height: responsiveHeight})
+      }
+    }
+
+    const handleClipboard = ()=> {
+      navigator.clipboard.writeText(url).then(() => toast({description: "Copied!"})).catch(err => toast({description: "Error in Copying Gif"}));
+    }
+    const handleEmbedLink = ()=> {
+      navigator.clipboard.writeText(embed).then(() => toast({description: "Copied!"})).catch(err => toast({description: "Error in Copying Gif"}));
+    }
+  useEffect(() => {
+    const allImages  = async()=> {
+    const images = await dataImage.getImages()
+    if(images?.documents){
+      const likedGif = images.documents.find(gif => gif.$id === id)
+      if(likedGif != undefined){
+        setToggleLike(true)
+      }
+    }
+    }
+    allImages()
+  }, [])
   
   
   const handleShare = () => {
     if (navigator.share) {
-      // Call the share function with content
       navigator
         .share({
           title: "Check this out!",
@@ -102,7 +127,7 @@ const GifCard = ({
   };
   return (
     <div className="flex flex-col">
-      <div className="flex w-[85%] justify-center mx-auto space-x-5">
+      <div className="flex w-[85%] md:flex-row flex-col justify-center mx-auto space-x-5">
         <div className="text-center">
           <img
             className="m-2 rounded-lg"
@@ -111,7 +136,7 @@ const GifCard = ({
             src={gif}
           />
           {src && (
-            <span className="text-sm text-gray-600 italic">source: {src}</span>
+            <span className="text-sm text-gray-600 italic">source: {truncatedSource}</span>
           )}
         </div>
         <div className="flex flex-col mt-4 ">
@@ -130,7 +155,7 @@ const GifCard = ({
             </span>
           </div>
           <div className="flex-col flex">
-            <span>Decription: {authorDescription}</span>
+            <span>Decription: {truncatedDescription}</span>
             <span>Uploaded Date: {date}</span>
           </div>
           <div className="flex-col flex">
@@ -197,7 +222,7 @@ const GifCard = ({
               readOnly
             />
           </div>
-          <Button type="submit" size="sm" className="px-3">
+          <Button onClick={handleEmbedLink} type="submit" size="sm" className="px-3">
             <span className="sr-only">Copy</span>
             <Copy />
           </Button>
@@ -234,7 +259,7 @@ const GifCard = ({
                     </Label>
                     <Input id="link" defaultValue={url} readOnly />
                   </div>
-                  <Button type="submit" size="sm" className="px-3">
+                  <Button onClick={handleClipboard} type="submit" size="sm" className="px-3">
                     <span className="sr-only">Copy</span>
                     <Copy />
                   </Button>

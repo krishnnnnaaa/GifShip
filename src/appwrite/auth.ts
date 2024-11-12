@@ -66,29 +66,6 @@ export class UserAuthService {
         }
     }
 
-    // async googleLogin(){
-    //     try {
-    //         return await this.account.createOAuth2Session(OAuthProvider.Google, `${env.originkey}page`, `${env.originkey}login`)
-    //             // console.log(loginWithGoogle);
-    //     } catch (error) {
-    //         if(error instanceof Error){
-    //             console.log(error);
-    //         }
-    //     }
-    // }
-    // async spotifyLogin(){
-    //     try {
-    //         const loginWithSpotify = await this.account.createOAuth2Session(OAuthProvider.Spotify, `${env.originkey}page`, env.originkey)
-    //         if(loginWithSpotify){
-    //             return loginWithSpotify
-    //         }else return
-    //     } catch (error) {
-    //         if(error instanceof Error){
-    //             console.log(error);
-    //         }
-    //     }
-    // }
-
     async getThisUser(){
         try {
                 const userAccount =  await this.account.get();
