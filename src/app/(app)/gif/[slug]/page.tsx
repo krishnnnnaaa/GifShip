@@ -35,7 +35,7 @@ const page = () => {
     <div>
         <Navbar/>
         <Search/>
-        <GifCard authorDescription={gifData?.user?.description as string} src={gifData?.source as string} authorInstagram={gifData?.user?.instagram_url as string} authorName={gifData?.user?.display_name as string} authorWebsite={gifData?.user?.website_url as string} date={gifData?.import_datetime as string} gif={gifData?.images.original.url as string} height={givenHeight && givenHeight < 400 ? '500' : gifData?.images.original.height as unknown as string } isVerified={gifData?.user?.is_verified as boolean} title={gifData?.title as string} width={givenWidth && givenWidth < 400 ? '500' : gifData?.images.original.width as unknown as string} key={gifData?.id} embed={gifData?.embed_url as string} />
+        <GifCard id={gifData?.id as string} authorDescription={gifData?.user?.description as string} src={gifData?.source as string} authorInstagram={gifData?.user?.instagram_url as string} authorName={gifData?.user?.display_name as string} authorWebsite={gifData?.user?.website_url as string} date={gifData?.import_datetime as string} gif={gifData?.images.original.url as string} height={givenHeight && givenHeight < 400 ? '500' : gifData?.images.original.height as unknown as string } isVerified={gifData?.user?.is_verified as boolean} title={gifData?.title as string} width={givenWidth && givenWidth < 400 ? '500' : gifData?.images.original.width as unknown as string} key={gifData?.id} embed={gifData?.embed_url as string} slug={gifData?.slug as string} gifType={gifData?.type as string} alt={gifData?.alt_text as string} responsiveWidth={gifData?.images.downsized_small.width as number }responsiveHeight={gifData?.images.downsized_small.height as number} />
     </div>
   )
 }

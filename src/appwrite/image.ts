@@ -15,9 +15,9 @@ export class DataImage{
         this.bucket = new Storage(this.client)
     }
 
-    async saveImage({slug, url, title, gifId, type, alt_text}: {slug:string, url:string, title:string, gifId:string, type:string, alt_text:string}){
+    async saveImage({slug, url, title, gifId, type, alt_text, width, height}: {slug:string, url:string, title:string, gifId:string, type:string, alt_text:string, width: number, height: number}){
         try {
-            return await this.databases.createDocument(env.appwriteDatabaseId, env.appwriteCollectionId, slug, {title, url, slug, gifId, type, alt_text})
+            return await this.databases.createDocument(env.appwriteDatabaseId, env.appwriteCollectionId, gifId, {title, url, slug, gifId, type, alt_text, width, height})
         } catch (error) {
             if(error instanceof Error){
                 console.log(error);
@@ -25,9 +25,9 @@ export class DataImage{
         }
     }
 
-    async removeImage(slug:string){
+    async removeImage(id:string){
         try {
-            return await this.databases.updateDocument(env.appwriteDatabaseId, env.appwriteCollectionId, slug)
+            return await this.databases.deleteDocument(env.appwriteDatabaseId, env.appwriteCollectionId, id)
         } catch (error) {
             if(error instanceof Error){
                 console.log(error);

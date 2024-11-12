@@ -5,6 +5,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,9 +21,9 @@ import { setUserDetails, userStateType } from "@/app/features/userSlice";
 const Navbar = () => {
   const { setTheme } = useTheme();
   const [user, setUser] = useState<userStateType>()
+  const [userinitial, setUserInitial] = useState('Anonymous')
   const userState = useAppSelector((state)=> state.user)
   const dispatch = useAppDispatch()
-  console.log(user);
   
   useEffect(() => {
     setUser(userState)
@@ -33,8 +34,17 @@ const Navbar = () => {
       }
   })
       .catch(err => console.log(err))
-      
-  }, [userState])
+    }, [userState])
+    useEffect(() => {
+    const getInitial = async()=> {
+      if(user){
+        const initial = await userAuthService.getUserInitial(user.name)
+        setUserInitial(initial as string)
+      }
+    }
+    getInitial()
+  }, [user])
+  
 
   const logout = ()=> {
     userAuthService.logout()
@@ -80,10 +90,22 @@ const Navbar = () => {
               </li>
               {
                user && user.status ?
-               <li className="bg-violet-800 px-4 cursor-pointer
-               mx-4 py-2 rounded-none text-white text-base hover:bg-violet-900" onClick={logout}>
-                   Log out
-               </li>
+             <DropdownMenu >
+             <DropdownMenuTrigger>
+             <Avatar className="mr-4">
+               <AvatarImage src={userinitial}/>
+               <AvatarFallback>AN</AvatarFallback>
+             </Avatar>
+             </DropdownMenuTrigger>
+             <DropdownMenuContent>
+               <DropdownMenuItem>
+                <Link href={`/favourites`}>
+                Favourite
+                </Link>
+                </DropdownMenuItem>
+               <DropdownMenuItem>Log out</DropdownMenuItem>
+             </DropdownMenuContent>
+           </DropdownMenu>
             :
            <Link href={`${env.originkey}login`}>
              <li className="bg-violet-800 px-4 cursor-pointer

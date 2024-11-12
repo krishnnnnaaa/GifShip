@@ -1,6 +1,6 @@
 import { Code, Heart, Send, Twitter, Verified } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Copy } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "./ui/separator";
 import { FaWhatsapp } from "react-icons/fa";
 import Suggestions from "./Suggestions";
+import dataImage from "@/appwrite/image";
 
 const GifCard = ({
   authorName = "Not Specified",
@@ -32,7 +33,13 @@ const GifCard = ({
   width,
   height,
   gif,
-  embed
+  embed,
+  id,
+  slug,
+  gifType,
+  alt,
+  responsiveHeight,
+  responsiveWidth
 }: {
   authorName: string;
   src: string;
@@ -45,12 +52,37 @@ const GifCard = ({
   width: string;
   height: string;
   gif: string;
-  embed: string
+  embed: string;
+  id: string;
+  slug: string;
+  gifType: string;
+  alt: string;
+  responsiveWidth: number;
+  responsiveHeight: number
 }) => {
   let url = gif?.replace("media2", "i");
   if(url === gif){
     url = gif?.replace("media1", "i");
+    if(url === gif){
+      url = gif?.replace("media0", 'i')
+    }
   } 
+
+  const [toggleLike, setToggleLike] = useState(false)
+  const handleFavouriteGif = ()=> {
+    setToggleLike(!toggleLike)
+  }
+  useEffect(() => {
+    if(toggleLike){      
+      dataImage.saveImage({slug, url: gif, title, gifId: id, type: gifType, alt_text:alt, width:responsiveWidth, height: responsiveHeight})
+      if(!toggleLike){
+        dataImage.removeImage(id)
+      }
+    }
+  }, [toggleLike])
+
+  
+  
   const handleShare = () => {
     if (navigator.share) {
       // Call the share function with content
@@ -127,9 +159,14 @@ const GifCard = ({
             <Separator orientation="horizontal" className="my-8" />
           </div>
           <div className="flex-col space-y-4 text-lg">
-            <div className="flex">
+            <div onClick={handleFavouriteGif} className="flex cursor-pointer">
               <span className="flex">
-                <Heart className="mr-4" size={30} />
+                {
+                  toggleLike ?
+                  <Heart className="mr-4 fill-red-700 text-red-700" size={30} />
+                  :
+                  <Heart className="mr-4" size={30} />
+                }
                 Favourite
               </span>
             </div>

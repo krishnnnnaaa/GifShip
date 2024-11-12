@@ -1,15 +1,17 @@
 import env from "@/environment/config";
-import { Account, Client, ID, OAuthProvider } from "appwrite";
+import { Account, Avatars, Client, ID, OAuthProvider } from "appwrite";
 
 export class UserAuthService {
     client = new Client();
     account: Account;
+    avatar: Avatars
 
     constructor(){
         this.client
         .setEndpoint(env.appwriteUrl)
         .setProject(env.appwriteProjectId)
         this.account = new Account(this.client)
+        this.avatar = new Avatars(this.client)
     }
 
     async createUser({name, email, password}: { name:string, email: string, password: string}){
@@ -98,6 +100,15 @@ export class UserAuthService {
         }
     }
 
+    async getUserInitial(name:string){
+        try {
+            return this.avatar.getInitials(name)
+        } catch (error) {
+            if(error instanceof Error){
+                console.log(error);
+            }
+        }
+    }
     // async loginAsGuest(){
     //     try {
     //         await this.account.createAnonymousSession()
