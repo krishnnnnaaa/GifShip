@@ -1,5 +1,5 @@
 import env from "@/environment/config";
-import { Client, Databases, ID, Query, Storage } from "appwrite";
+import { Client, Databases, Storage } from "appwrite";
 
 
 export class DataImage{

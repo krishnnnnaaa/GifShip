@@ -22,7 +22,7 @@ interface favouriteGifs {
   height: number
 }
 
-const page = () => {
+export default function FavouritePag () {
     const [favourites, setFavourites] = useState<favouriteGifs[] | undefined>(undefined)
     useEffect(() => {
         const getImages = async()=>{
@@ -58,5 +58,3 @@ const page = () => {
     </div>
   )
 }
-
-export default page

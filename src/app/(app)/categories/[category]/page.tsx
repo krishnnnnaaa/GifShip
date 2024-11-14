@@ -14,7 +14,7 @@ import env from "@/environment/config";
 import GifsGrid from "@/components/GifsGrid";
 import { usePathname } from "next/navigation";
 
-const page = () => {
+export default function CategoryPage () {
   const [categoryData, setCategoryData] = useState<[IGif]>()
   const pathname = usePathname()
   const category = pathname.split('/').pop();  
@@ -64,5 +64,3 @@ const page = () => {
     </>
   );
 };
-
-export default page;

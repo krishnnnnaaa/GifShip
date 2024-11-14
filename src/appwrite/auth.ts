@@ -1,5 +1,5 @@
 import env from "@/environment/config";
-import { Account, Avatars, Client, ID, OAuthProvider } from "appwrite";
+import { Account, Avatars, Client, ID } from "appwrite";
 
 export class UserAuthService {
     client = new Client();
@@ -86,23 +86,6 @@ export class UserAuthService {
             }
         }
     }
-    // async loginAsGuest(){
-    //     try {
-    //         await this.account.createAnonymousSession()
-    //     } catch (error) {
-            
-    //     }
-    // }
-    // async getUserSession(){
-    //     try {
-    //             const userSession =  await this.account.getSession('current')
-    //             return userSession;
-    //     } catch (error) {
-    //         if(error instanceof Error){
-    //             console.log(error);
-    //         }
-    //     }
-    // }
 
     async logout(){
         try {

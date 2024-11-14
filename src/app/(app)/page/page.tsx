@@ -1,4 +1,5 @@
 'use client'
+import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import QuickBadge from '@/components/QuickBadge'
 import Search from '@/components/Search'
@@ -13,6 +14,7 @@ const page = () => {
         <Search/>
         <QuickBadge/>
         <Trending/>
+        <Footer/>
     </div>
   )
 }

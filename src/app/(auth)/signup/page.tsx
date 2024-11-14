@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { userSchema } from "@/schema/userSchema";
 import { Button } from "@/components/ui/button";
-import { FcGoogle } from "react-icons/fc";
-import { FaSpotify } from "react-icons/fa";
 import logo from '../../logo.png'
 import {
   Form,
@@ -19,13 +17,12 @@ import {
 import { Input } from "@/components/ui/input";
 import userAuthService from "@/appwrite/auth";
 import { useToast } from "@/hooks/use-toast";
-import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-const page = () => {
+export default function SignupPage() {
   const { toast } = useToast();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,15 +34,6 @@ const page = () => {
       password: "",
     },
   });
-
-  // const signupWithGoogle = async () => {
-  //   userAuthService.googleLogin();
-  //   router.push("/page");
-  // };
-  // const signupWithSpotify = async () => {
-  //   userAuthService.spotifyLogin();
-  //   router.push("/page");
-  // };
 
   const onSubmit = async (data: z.infer<typeof userSchema>) => {
     try {
@@ -142,5 +130,3 @@ const page = () => {
     </div>
   );
 };
-
-export default page;

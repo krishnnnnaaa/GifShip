@@ -1,6 +1,6 @@
 import env from '@/environment/config'
 import axios from 'axios'
-import { LucideSearch, Search } from 'lucide-react'
+import { LucideSearch } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 

@@ -7,9 +7,7 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
-import { FcGoogle } from "react-icons/fc";
 import logo from "../../logo.png"
-import { FaSpotify } from "react-icons/fa";
 import {
   Form,
   FormControl,
@@ -19,12 +17,11 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { z } from 'zod'
-import { Separator } from '@/components/ui/separator'
 import { Loader2Icon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const page = () => {
+export default function LoginPage(){
   const {toast} = useToast()
     const router = useRouter()
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -116,5 +113,3 @@ const page = () => {
     </div>
   )
 }
-
-export default page

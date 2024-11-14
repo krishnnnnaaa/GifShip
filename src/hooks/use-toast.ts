@@ -18,12 +18,13 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
+// Refactor the actionTypes to be a `const` object with a `const` assertion
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
   DISMISS_TOAST: "DISMISS_TOAST",
   REMOVE_TOAST: "REMOVE_TOAST",
-} as const
+} as const  // Use `as const` to retain literal types instead of `string`
 
 let count = 0
 
@@ -32,7 +33,7 @@ function genId() {
   return count.toString()
 }
 
-type ActionType = typeof actionTypes
+type ActionType = typeof actionTypes  // This will now correctly infer literal types, e.g., 'ADD_TOAST'
 
 type Action =
   | {

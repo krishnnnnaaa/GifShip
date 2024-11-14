@@ -1,4 +1,4 @@
-import { Code, Heart, Send, Twitter, Verified } from "lucide-react";
+import { Code, Heart, Send, Share2Icon, Twitter, Verified } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Copy } from "lucide-react";
@@ -17,7 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "./ui/separator";
-import { FaWhatsapp } from "react-icons/fa";
 import Suggestions from "./Suggestions";
 import dataImage from "@/appwrite/image";
 import { useToast } from "@/hooks/use-toast";
@@ -90,10 +89,10 @@ const GifCard = ({
     }
 
     const handleClipboard = ()=> {
-      navigator.clipboard.writeText(url).then(() => toast({description: "Copied!"})).catch(err => toast({description: "Error in Copying Gif"}));
+      navigator.clipboard.writeText(url).then(() => toast({description: "Copied!"})).catch(() => toast({description: "Error in Copying Gif"}));
     }
     const handleEmbedLink = ()=> {
-      navigator.clipboard.writeText(embed).then(() => toast({description: "Copied!"})).catch(err => toast({description: "Error in Copying Gif"}));
+      navigator.clipboard.writeText(embed).then(() => toast({description: "Copied!"})).catch(() => toast({description: "Error in Copying Gif"}));
     }
   useEffect(() => {
     const allImages  = async()=> {
@@ -106,11 +105,16 @@ const GifCard = ({
     }
     }
     allImages()
-  }, [])
+  }, )
   
   
-  const handleShare = () => {
-    if (navigator.share) {
+  const handleTwitterShare = () => {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent('Check out this awesome media: ')}&url=${encodeURIComponent(url)}`;
+  window.open(twitterUrl, '_blank');
+  };
+
+  const handleShare = ()=> {
+     if (navigator.share) {
       navigator
         .share({
           title: "Check this out!",
@@ -124,7 +128,7 @@ const GifCard = ({
     } else {
       console.log("Web Share API is not supported in this browser.");
     }
-  };
+  }
   return (
     <div className="flex flex-col">
       <div className="flex w-[85%] md:flex-row flex-col justify-center mx-auto space-x-5">
@@ -208,7 +212,7 @@ const GifCard = ({
         <DialogHeader>
           <DialogTitle>Embed Gif</DialogTitle>
           <DialogDescription>
-          Want to embed this Gif on your website or blog? Just drop in the embed code below and you're done!
+          Want to embed this Gif on your website or blog? Just drop in the embed code below and you&apos;re done!
           </DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
@@ -266,15 +270,15 @@ const GifCard = ({
                 </div>
                 <div>
                   <div
-                    onClick={handleShare}
+                    onClick={handleTwitterShare}
                     className="flex space-x-4 py-2 my-2 border-2 border-gray-600 rounded-lg px-4 bg-white text-blue-600 font-semibold cursor-pointer"
                   >
                     <Twitter className="fill-blue-600 mx-2" size={20} /> Share
                     via Twitter
                   </div>
-                  <div className="flex space-x-4 py-2 my-2 border-2 border-gray-600 rounded-lg px-4 bg-white text-green-600 font-semibold cursor-pointer">
-                    <FaWhatsapp className="fill-green-600 mx-2" size={20} />{" "}
-                    Share via Whatsapp
+                  <div onClick={handleShare} className="flex space-x-4 py-2 my-2 border-2 border-gray-600 rounded-lg px-4 bg-white text-black font-semibold cursor-pointer">
+                    <Share2Icon className="fill-black mx-2" size={20} />{" "}
+                    More
                   </div>
                 </div>
                 <DialogFooter className="sm:justify-start">

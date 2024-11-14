@@ -7,7 +7,7 @@ import { IGif } from '@giphy/js-types'
 import axios from 'axios'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-const page = () => {
+export default function GifPage(){
     const [gifData, setGifData] = useState<IGif>()
     const pathname = usePathname()
     const slug = pathname.split('/').pop();  
@@ -30,7 +30,7 @@ const page = () => {
     }
     useEffect(() => {
         fetchGidf()
-    }, [])
+    },)
   return (
     <div>
         <Navbar/>
@@ -39,5 +39,3 @@ const page = () => {
     </div>
   )
 }
-
-export default page
