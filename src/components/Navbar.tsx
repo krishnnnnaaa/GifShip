@@ -50,13 +50,20 @@ const Navbar = () => {
 
   const logout = ()=> {
     userAuthService.logout()
-    setUser({
+    dispatch(setUserDetails({
       createdAt: '',
       email: '',
       id:'',
       name: '',
       status: false
-    })
+    }))
+    // setUser({
+    //   createdAt: '',
+    //   email: '',
+    //   id:'',
+    //   name: '',
+    //   status: false
+    // })
   }
   
   

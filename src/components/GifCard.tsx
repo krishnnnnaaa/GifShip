@@ -20,6 +20,7 @@ import { Separator } from "./ui/separator";
 import Suggestions from "./Suggestions";
 import dataImage from "@/appwrite/image";
 import { useToast } from "@/hooks/use-toast";
+import { useAppSelector } from "@/app/hooks";
 const GifCard = ({
   authorName = "Not Specified",
   isVerified,
@@ -73,19 +74,21 @@ const GifCard = ({
     }
   } 
   const {toast} = useToast()
+  const userState = useAppSelector((state)=> state.user)
   const [toggleLike, setToggleLike] = useState(false)
   const truncatedSource = src.length > 41 ? src.slice(0, 38) + '...' : src;
   const truncatedDescription = authorDescription.length > 100 ? authorDescription.slice(0, 50) + '...' : authorDescription;
 
   const handleFavouriteGif = ()=> {
-    
-    if(toggleLike){      
-      dataImage.removeImage(id)
-      setToggleLike(false)
-    }else{
+    if(userState.status){
+      if(toggleLike){      
+        dataImage.removeImage(id)
+        setToggleLike(false)
+      }else{
         setToggleLike(true)
         dataImage.saveImage({slug, url: gif, title, gifId: id, type: gifType, alt_text:alt, width:responsiveWidth, height: responsiveHeight})
       }
+    }
     }
 
     const handleClipboard = ()=> {
