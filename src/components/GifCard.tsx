@@ -99,15 +99,18 @@ const GifCard = ({
     }
   useEffect(() => {
     const allImages  = async()=> {
-    const images = await dataImage.getImages()
-    if(images?.documents){
-      const likedGif = images.documents.find(gif => gif.$id === id)
-      if(likedGif != undefined){
-        setToggleLike(true)
+      const images = await dataImage.getImages()
+      if(images?.documents){
+        const likedGif = images.documents.find(gif => gif.$id === id)
+        if(likedGif != undefined){
+          setToggleLike(true)
+        }
       }
     }
-    }
+    if(userState.status){
     allImages()
+  }
+  else return
   }, )
   
   
