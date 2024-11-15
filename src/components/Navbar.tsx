@@ -76,29 +76,29 @@ const Navbar = () => {
       </div>
       <div>
         <ul className="flex items-center">
-            <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-fuchsia-600	hover:bg-fuchsia-600 hover:text-white transition-all">
               <Link href={`${env.originkey}categories/reactions/`}>
+            <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-fuchsia-600	hover:bg-fuchsia-600 hover:text-white transition-all">
               Reactions
-              </Link>
               </li>
+              </Link>
+              <Link href={`${env.originkey}categories/sports/`}>
             <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-green-600	hover:bg-green-600
              hover:text-white transition-all">
-               <Link href={`${env.originkey}categories/sports/`}>
               Sports
-               </Link>
               </li>
+               </Link>
+               <Link href={`${env.originkey}categories/anime/`}>
             <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-sky-600	hover:bg-sky-600
              hover:text-white transition-all">
-               <Link href={`${env.originkey}categories/anime/`}>
               Anime
-               </Link>
               </li>
+               </Link>
+               <Link href={`${env.originkey}categories/cats/`}>
             <li className="pt-2 pb-1 cursor-pointer w-20 text-center md:block hidden mx-4 border-b-4 border-lime-600	hover:bg-lime-600
              hover:text-white transition-all">
-               <Link href={`${env.originkey}categories/cats/`}>
               Cat 
-               </Link>
               </li>
+               </Link>
               {
                user && user.status ?
              <DropdownMenu >

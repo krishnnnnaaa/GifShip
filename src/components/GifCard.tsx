@@ -21,6 +21,7 @@ import Suggestions from "./Suggestions";
 import dataImage from "@/appwrite/image";
 import { useToast } from "@/hooks/use-toast";
 import { useAppSelector } from "@/app/hooks";
+import { useRouter } from "next/navigation";
 const GifCard = ({
   authorName = "Not Specified",
   isVerified,
@@ -74,6 +75,7 @@ const GifCard = ({
     }
   } 
   const {toast} = useToast()
+  const router = useRouter()
   const userState = useAppSelector((state)=> state.user)
   const [toggleLike, setToggleLike] = useState(false)
   const truncatedSource = src.length > 41 ? src.slice(0, 38) + '...' : src;
@@ -88,6 +90,8 @@ const GifCard = ({
         setToggleLike(true)
         dataImage.saveImage({slug, url: gif, title, gifId: id, type: gifType, alt_text:alt, width:responsiveWidth, height: responsiveHeight})
       }
+    }else{
+      router.push('/login')
     }
     }
 
