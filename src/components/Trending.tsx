@@ -9,6 +9,8 @@ import { useToast } from '@/hooks/use-toast'
 
 const Trending = () => {
     const [data, setData] = useState<[IGif]>()
+    console.log(env.originkey);
+    
     const {toast} = useToast()
     const showTrending = async()=> {
         try {
